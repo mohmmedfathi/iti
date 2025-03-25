@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Original and Suboriginal</title>
+    <style>
+      .box {
+        width: 150px;
+        height: 150px;
+        margin: 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+      #original {
+        background-color: black;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="original" class="box">i am original</div>
+    </div>
+
+    <script>
+      const original = document.getElementById("original");
+      const container = document.getElementById("container");
+
+      
+      function randomColor() {
+        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+      }
+
+      original.addEventListener("click", function () {
+        
+        const sub = original.cloneNode(true); // copy original div
+
+       
+        sub.id = "";
+        sub.textContent = "i am suboriginal";
+        sub.style.backgroundColor = randomColor();
+        sub.style.cursor = "default";
+
+      
+        container.appendChild(sub);
+      });
+    </script>
+  </body>
+</html>

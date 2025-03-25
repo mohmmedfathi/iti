@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../iti/Javascript"
+		},
+		{
+			"path": "../Day1"
+		},
+		{
+			"path": "../Day2"
+		},
+		{
+			"path": "../Day3"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

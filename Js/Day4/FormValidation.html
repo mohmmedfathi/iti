@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Information Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e6d5e8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #666;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .input-group .error {
+        color: #ff6b6b;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .input-group input.invalid {
+        border: 1px solid #ff6b6b;
+        background-color: #fff8f8;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .add-btn {
+        background-color: #8a2be2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .reset-btn {
+        background-color: white;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      table {
+        width: 100%;
+        max-width: 500px;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #8a2be2;
+      }
+
+      th {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form id="userForm">
+        <div class="input-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" />
+          <div class="error" id="nameError">This field is required</div>
+        </div>
+
+        <div class="input-group">
+          <label for="age">Age:</label>
+          <input type="text" id="age" name="age" />
+          <div class="error" id="ageError">This field is required</div>
+        </div>
+
+        <div class="input-group">
+          <label for="email">example@mail.com</label>
+          <input type="email" id="email" name="email" />
+          <div class="error" id="emailError">This field is required</div>
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="add-btn" id="addBtn">Add</button>
+          <button type="reset" class="reset-btn" id="resetBtn">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>E-mail</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("userForm");
+        const addBtn = document.getElementById("addBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const tableBody = document.getElementById("tableBody");
+
+        const nameInput = document.getElementById("name");
+        const ageInput = document.getElementById("age");
+        const emailInput = document.getElementById("email");
+
+        const nameError = document.getElementById("nameError");
+        const ageError = document.getElementById("ageError");
+        const emailError = document.getElementById("emailError");
+
+        nameInput.addEventListener("input", function () {
+          if (nameInput.value.trim() === "") {
+            nameInput.classList.add("invalid");
+            nameError.style.display = "block";
+          } else {
+            nameInput.classList.remove("invalid");
+            nameError.style.display = "none";
+          }
+        });
+
+        ageInput.addEventListener("input", function () {
+          const value = ageInput.value.trim();
+
+          ageInput.value = value.replace(/\D/g, "");
+
+          if (value === "") {
+            ageInput.classList.add("invalid");
+            ageError.style.display = "block";
+            ageError.textContent = "This field is required";
+          } else {
+            ageInput.classList.remove("invalid");
+            ageError.style.display = "none";
+          }
+        });
+
+        emailInput.addEventListener("input", function () {
+          const value = emailInput.value.trim();
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (value === "") {
+            emailInput.classList.add("invalid");
+            emailError.style.display = "block";
+            emailError.textContent = "This field is required";
+          } else if (!emailPattern.test(value)) {
+            emailInput.classList.add("invalid");
+            emailError.style.display = "block";
+            emailError.textContent = "Please enter a valid email address";
+          } else {
+            emailInput.classList.remove("invalid");
+            emailError.style.display = "none";
+          }
+        });
+
+        addBtn.addEventListener("click", function () {
+          let isValid = true;
+
+          if (nameInput.value.trim() === "") {
+            nameInput.classList.add("invalid");
+            nameError.style.display = "block";
+            isValid = false;
+          }
+
+          if (ageInput.value.trim() === "") {
+            ageInput.classList.add("invalid");
+            ageError.style.display = "block";
+            isValid = false;
+          }
+
+          
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailInput.value.trim() === "") {
+            emailInput.classList.add("invalid");
+            emailError.style.display = "block";
+            emailError.textContent = "This field is required";
+            isValid = false;
+          } else if (!emailPattern.test(emailInput.value.trim())) {
+            emailInput.classList.add("invalid");
+            emailError.style.display = "block";
+            emailError.textContent = "Please enter a valid email address";
+            isValid = false;
+          }
+
+          if (isValid) {
+            const newRow = document.createElement("tr");
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = nameInput.value.trim();
+
+            const ageCell = document.createElement("td");
+            ageCell.textContent = ageInput.value.trim();
+
+            const emailCell = document.createElement("td");
+            emailCell.textContent = emailInput.value.trim();
+
+            newRow.appendChild(nameCell);
+            newRow.appendChild(ageCell);
+            newRow.appendChild(emailCell);
+
+            tableBody.appendChild(newRow);
+
+            form.reset();
+          }
+        });
+
+        resetBtn.addEventListener("click", function () {
+          nameInput.classList.remove("invalid");
+          ageInput.classList.remove("invalid");
+          emailInput.classList.remove("invalid");
+
+          nameError.style.display = "none";
+          ageError.style.display = "none";
+          emailError.style.display = "none";
+        });
+      });
+    </script>
+  </body>
+</html>
