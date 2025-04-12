@@ -89,15 +89,15 @@ macbook@MacBook ~ % tail -n 7 /etc/passwd
 
 
 
-## 11. Display `man` Page for `passwd` (File Format - Section 5)
+## 11. Display `man` Page for `passwd` 
 
 ```bash
-macbook@MacBook ~ % man 5 passwd
+macbook@MacBook ~ % man passwd | less
 ```
 
 
 
-## 12. Display `man` Page for `passwd` (Command)
+## 12. Display `man` Page for `passwd` 
 
 ```bash
 macbook@MacBook ~ % man passwd
