@@ -62,6 +62,7 @@ macbook@MacBook ~ % mv ~/mypasswd ~/oldpasswd
 cd ~
 cd $HOME
 cd
+cd /Users/macbook
 ```
 
 
