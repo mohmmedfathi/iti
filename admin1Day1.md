@@ -1,5 +1,6 @@
 # Admin 1 - LAB1
 
+<img width="1010" alt="Image" src="https://github.com/user-attachments/assets/40ec72af-a1cd-4e03-9bf7-5d9a9d9e1c7f" />
 
 <br>
 
